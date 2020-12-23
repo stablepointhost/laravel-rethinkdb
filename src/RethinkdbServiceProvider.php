@@ -17,7 +17,7 @@ class RethinkdbServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Model::setConnectionResolver($this->app['db'],[]);
+        Model::setConnectionResolver($this->app['db']);
         Model::setEventDispatcher($this->app['events']);
     }
 
@@ -36,7 +36,7 @@ class RethinkdbServiceProvider extends ServiceProvider
 
         $this->app->singleton('command.rethink-migrate.make', function ($app) {
 
-            $creator = new MigrationCreator($app['files']);
+            $creator = new MigrationCreator($app['files'],[]);
             $composer = $app['composer'];
 
             return new MigrateMakeCommand($creator, $composer);
